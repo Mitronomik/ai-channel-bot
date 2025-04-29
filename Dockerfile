@@ -14,6 +14,10 @@ WORKDIR /app
 #    && rm -rf /var/lib/apt/lists/*
 
 # Install pip dependencies
+# Install system dependencies and update certificates
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
@@ -25,7 +29,7 @@ COPY ./app /app/app
 # RUN mkdir -p /app/data && chown -R nobody:nogroup /app/data # Create as non-root if needed
 
 # Specify the command to run on container startup
-CMD ["python", "app/bot.py"]
+CMD ["python", "-m", "app.bot"]
 
 # Optional: Run as a non-root user for better security
 # RUN useradd -m myuser

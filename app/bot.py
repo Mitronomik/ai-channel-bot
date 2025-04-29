@@ -1,5 +1,6 @@
 import logging
 import sys
+from telegram import Update
 from telegram.ext import (
     ApplicationBuilder,
     CommandHandler, # Используется для фильтров в MessageHandler
