@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  telegram-bot:
+    build: . # Build the image from the Dockerfile in the current directory
+    container_name: ai_channel_bot
+    restart: unless-stopped
+    env_file:
+      - .env # Load environment variables from the .env file
+    volumes:
+      # Mount the host 'data' directory to '/app/data' inside the container
+      # This makes the CSV log and plot persistent across container restarts
+      - ./data:/app/data
+    # Optional: Add network configuration if needed (e.g., to connect to a proxy container)
+    # networks:
+    #  - mynetwork
+
+# Optional: Define networks if needed
+# networks:
+#  mynetwork:
+#    driver: bridge
